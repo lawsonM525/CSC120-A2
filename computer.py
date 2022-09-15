@@ -21,7 +21,7 @@ class Computer:
         self.price = price
 
     def update_price(self, item_id: int, new_price: int):
-        if item_id in self.inventory:
+        if item_id in self.inventory:  #why does his work?
             self.inventory[item_id]["price"] = new_price
         else:
             print("Item", item_id, "not found. Cannot update price.")
