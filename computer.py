@@ -3,6 +3,17 @@ from typing import Dict, Union, Optional
 class Computer:
 
     # This  class defines the blueprint for individual computers within the shop
+    # attributes required for the computer class: 
+    # description of the computer, type of processor, hard drive capacity, memory, OS, year it was made, price
+    # methods required:
+    # updating price, refurbishing the computer (repricing & upgrading the OS)
+
+    '''
+    Pseudocode Steps:
+    1. Initialize attributes within constructor
+    2. Define method to update price
+    3. Define method to refurbish computer
+    '''
 
     def __init__(self, 
     description: str, 
@@ -21,7 +32,7 @@ class Computer:
         self.price = price
 
     def update_price(self, item_id: int, new_price: int):
-        if item_id in self.inventory:  #why does his work?
+        if item_id in self.inventory: 
             self.inventory[item_id]["price"] = new_price
         else:
             print("Item", item_id, "not found. Cannot update price.")
