@@ -1,5 +1,7 @@
-import oo_resale_shop
+
 from typing import Dict, Union, Optional
+from oo_resale_shop import ResaleShop
+
 class Computer:
 
     # This  class defines the blueprint for individual computers within the shop
@@ -16,13 +18,13 @@ class Computer:
     '''
 
     def __init__(self, 
-    description: str, 
-    processor_type: str, 
-    hard_drive_capacity: int, 
-    memory: int, 
-    operating_system: str, 
-    year_made: int,
-    price: int):
+    description: str, # computer description (eg model and type)
+    processor_type: str, # computer processor's type (eg Intel)
+    hard_drive_capacity: int, # amount of storage capacity in hard drive
+    memory: int, # amount of computer memory available
+    operating_system: str, # OS currently installed
+    year_made: int,# year the computer was made
+    price: int): # price of computer
         self.description = description
         self.processor_type = processor_type
         self.hard_drive_capacity = hard_drive_capacity
@@ -31,25 +33,9 @@ class Computer:
         self.year_made = year_made
         self.price = price
 
-    def update_price(self, item_id: int, new_price: int):
-        if item_id in self.inventory: 
-            self.inventory[item_id]["price"] = new_price
+    def update_price(self, shop: ResaleShop, item_id: int, new_price: int):
+        if item_id in shop.inventory: 
+            shop.inventory[item_id]["price"] = new_price
         else:
             print("Item", item_id, "not found. Cannot update price.")
         
-    def refurbish(self, item_id: int, new_os: Optional[str] = None):
-        if item_id in self.inventory:
-            computer = self.inventory[item_id] # locate the computer
-            if int(computer["year_made"]) < 2000:
-                computer["price"] = 0 # too old to sell, donation only
-            elif int(computer["year_made"]) < 2012:
-                computer["price"] = 250 # heavily-discounted price on machines 10+ years old
-            elif int(computer["year_made"]) < 2018:
-                computer["price"] = 550 # discounted price on machines 4-to-10 year old machines
-            else:
-                computer["price"] = 1000 # recent stuff
-
-            if new_os is not None:
-                computer["operating_system"] = new_os # update details after installing new OS
-        else:
-            print("Item", item_id, "not found. Please select another item to refurbish.")
